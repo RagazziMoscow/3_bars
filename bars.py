@@ -37,7 +37,6 @@ def circle_distance(long1, lat1, long2, lat2):
 	lat2 = math.radians(lat2)
 
 
-	
 	sin1 = math.sin(lat1)
 	sin2 = math.sin(lat2)
 	cos1 = math.cos(lat1)
@@ -60,15 +59,15 @@ def get_nearest_bar(list, long, lat):
 	long = float(long)
 	lat = float(lat)
 	name = list[0]["Cells"]["Name"]
-	Data = get_geo_data(list[0])
-	long_data = Data["long"]
-	lat_data = Data["lat"]
+	data = get_geo_data(list[0])
+	long_data = data["long"]
+	lat_data = data["lat"]
 	min_dist = circle_distance(long_data , lat_data, long, lat)
 	i = 1
 	for item in list:
-		Data = get_geo_data(item)
-		long_data = Data["long"]
-		lat_data = Data["lat"]
+		data = get_geo_data(item)
+		long_data = data["long"]
+		lat_data = data["lat"]
 		if (circle_distance(long_data, lat_data, long, lat)<min_dist):
 			min_dist = circle_distance(long_data, lat_data, long, lat)
 			name = item["Cells"]["Name"]
