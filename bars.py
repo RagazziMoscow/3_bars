@@ -48,7 +48,7 @@ def circle_distance(long1, lat1, long2, lat2):
 	return distance
 
 ## Возвращает геоданные (широту и долготу)
-def  get_geoData(object):
+def  get_geo_data(object):
 	return {"long" : object["Cells"]["geoData"]["coordinates"][1], "lat" : object["Cells"]["geoData"]["coordinates"][0]}
 
 
@@ -59,17 +59,17 @@ def get_nearest_bar(list, long, lat):
 	long = float(long)
 	lat = float(lat)
 	name = list[0]["Cells"]["Name"]
-	Data = get_geoData(list[0])
-	longData = Data["long"]
-	latData = Data["lat"]
-	min_dist = circle_distance(longData , latData, long, lat)
+	Data = get_geo_data(list[0])
+	long_data = Data["long"]
+	lat_data = Data["lat"]
+	min_dist = circle_distance(long_data , lat_data, long, lat)
 	i = 1
 	for item in list:
-		Data = get_geoData(item)
-		longData = Data["long"]
-		latData = Data["lat"]
-		if (circle_distance(longData, latData, long, lat)<min_dist):
-			min_dist = circle_distance(longData, latData, long, lat)
+		Data = get_geo_data(item)
+		long_data = Data["long"]
+		lat_data = Data["lat"]
+		if (circle_distance(long_data, lat_data, long, lat)<min_dist):
+			min_dist = circle_distance(long_data, lat_data, long, lat)
 			name = item["Cells"]["Name"]
 		
 	return {"Name" : name, "distance" : round(min_dist/1000, 2)}
@@ -87,9 +87,9 @@ print("Самый маленький бар: ", c["Name"], "Число мест:
 #e = circle_distance(55.688475, 37.909184, 41.988559, 21.463479)
 #print(e)
 print("Введите вашу широту")
-longData= input()
+long_data= input()
 print("Введите вашу долготу")
-latData = input()
-e = get_nearest_bar(list, longData, latData)
+lat_data = input()
+e = get_nearest_bar(list, long_data, lat_data)
 print("Ближайший бар: ", e["Name"], ", Близость: ", e["distance"], " км")
 
