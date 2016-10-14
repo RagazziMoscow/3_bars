@@ -37,6 +37,7 @@ def circle_distance(long1, lat1, long2, lat2):
 	lat2 = math.radians(lat2)
 
 
+	
 	sin1 = math.sin(lat1)
 	sin2 = math.sin(lat2)
 	cos1 = math.cos(lat1)
