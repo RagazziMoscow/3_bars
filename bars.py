@@ -26,16 +26,6 @@ def get_max_bar(object):
     return bars_list[0]
     
 
-'''
-	max = object[0]["Cells"]["SeatsCount"]
-	name = ""
-	for item in object:
-		if item["Cells"]["SeatsCount"]>max:
-			max = item["Cells"]["SeatsCount"]
-			name = item["Cells"]["Name"]
-	return {"Name": name, "SeatsCount": max}
-'''
-
 ## Возвращает имя и число мест самого маленького бара
 def  get_min_bar(object):
 
@@ -49,15 +39,6 @@ def  get_min_bar(object):
     # Забираем из списка первый элемент
     return bars_list[0]
 
-'''
-	min = object[0]["Cells"]["SeatsCount"]
-	name = ""
-	for item in object:
-		if item["Cells"]["SeatsCount"]<min:
-			min = item["Cells"]["SeatsCount"]
-			name = item["Cells"]["Name"]
-	return {"Name": name, "SeatsCount": min}
-'''
 
 ##Считает расстояние по дуге на Земле между двумя точками, заданными широтой и долготой в градусах
 ## Принимает в качестве параметров значения широт и долгот двух точек, расстояние между которыми требуется определить
