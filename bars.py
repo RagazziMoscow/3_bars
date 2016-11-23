@@ -13,15 +13,13 @@ def load_json(file_path):
         return None
 
 
-def get_max_bar(bar_list):
-
+def get_maximal_bar(bar_list):
     max_bar = max(bar_list, key=lambda x: x["Cells"]["SeatsCount"])
     return {"Name": max_bar["Cells"]["Name"],
             "SeatsCount": max_bar["Cells"]["SeatsCount"]}
 
 
-def get_min_bar(bar_list):
-
+def get_minimal_bar(bar_list):
     min_bar = min(bar_list, key=lambda x: x["Cells"]["SeatsCount"])
     return {"Name": min_bar["Cells"]["Name"],
             "SeatsCount": min_bar["Cells"]["SeatsCount"]}
@@ -71,8 +69,8 @@ def main():
 
     bar_list = load_json(sys.argv[1])
     if bar_list is not None:
-        max_bar = get_max_bar(bar_list)
-        min_bar = get_min_bar(bar_list)
+        max_bar = get_maximal_bar(bar_list)
+        min_bar = get_minimal_bar(bar_list)
         print("Самый большой бар: ", max_bar["Name"],
               "Число мест: ", max_bar["SeatsCount"])
         print("Самый маленький бар: ", min_bar["Name"],
