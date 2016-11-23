@@ -4,7 +4,6 @@ import sys
 import os.path
 
 
-# Загрузка файла, возвращает объект
 def load_json(file_path):
     if(os.path.exists(file_path)):
         with open(file_path, "r") as json_file:
@@ -14,27 +13,20 @@ def load_json(file_path):
         return None
 
 
-# Возвращает словарь в виде имени и числа мест самого большого бара
 def get_max_bar(bar_list):
 
-    max_count = max(bar["Cells"]["SeatsCount"] for bar in bar_list)  # Получаем максимальное число мест
-    for item in bar_list:
-        if(item["Cells"]["SeatsCount"] == max_count):
-            return {"Name": item["Cells"]["Name"],
-                    "SeatsCount": item["Cells"]["SeatsCount"]}
+    max_bar = max(bar_list, key=lambda x: x["Cells"]["SeatsCount"])
+    return {"Name": max_bar["Cells"]["Name"],
+            "SeatsCount": max_bar["Cells"]["SeatsCount"]}
 
 
-# Возвращает словарь в виде имени и числа мест самого маленького бара
 def get_min_bar(bar_list):
 
-    min_count = min(bar["Cells"]["SeatsCount"] for bar in bar_list)  # Получаем максимальное число мест
-    for item in bar_list:
-        if(item["Cells"]["SeatsCount"] == min_count):
-            return {"Name": item["Cells"]["Name"],
-                    "SeatsCount": item["Cells"]["SeatsCount"]}
+    min_bar = min(bar_list, key=lambda x: x["Cells"]["SeatsCount"])
+    return {"Name": min_bar["Cells"]["Name"],
+            "SeatsCount": min_bar["Cells"]["SeatsCount"]}
 
 
-# Считает расстояние между точками, заданными широтой и долготой в градусах
 def circle_distance(long1, lat1, long2, lat2):
     long1 = math.radians(long1)
     lat1 = math.radians(lat1)
@@ -51,13 +43,11 @@ def circle_distance(long1, lat1, long2, lat2):
     return distance
 
 
-# Возвращает словарь и геоданными(широту и долготу)
 def get_geo_data(bar_item):
     return {"long": bar_item["Cells"]["geoData"]["coordinates"][1],
             "lat": bar_item["Cells"]["geoData"]["coordinates"][0]}
 
 
-# Возвращает словрь в виде имени ближнего бара и расстояния до него
 def get_nearest_bar(bar_list, long, lat):
     long = float(long)
     lat = float(lat)
@@ -88,6 +78,8 @@ def main():
         print("Самый маленький бар: ", min_bar["Name"],
               "Число мест: ", min_bar["SeatsCount"])
 
+        #e = circle_distance(55.688475, 37.909184, 41.988559, 21.463479)
+        #print(e)
         long_data = input("Введите вашу широту\n")
         lat_data = input("Введите вашу долготу\n")
         nearest_bar = get_nearest_bar(bar_list, long_data, lat_data)
