@@ -70,8 +70,6 @@ def main():
         print("Самый маленький бар: ", min_bar["Name"],
               "Число мест: ", min_bar["SeatsCount"])
 
-        #e = circle_distance(55.688475, 37.909184, 41.988559, 21.463479)
-        #print(e)
         long_data = input("Введите вашу широту\n")
         lat_data = input("Введите вашу долготу\n")
         nearest_bar = get_nearest_bar(bar_list, long_data, lat_data)
