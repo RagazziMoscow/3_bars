@@ -49,20 +49,14 @@ def get_geo_data(bar_item):
 def get_nearest_bar(bar_list, long, lat):
     long = float(long)
     lat = float(lat)
-    bar_name = bar_list[0]["Cells"]["Name"]
-    geo_data = get_geo_data(bar_list[0])
-    long_data = geo_data["long"]
-    lat_data = geo_data["lat"]
-    min_dist = circle_distance(long_data, lat_data, long, lat)
-    for item in bar_list:
-        geo_data = get_geo_data(item)
-        long_data = geo_data["long"]
-        lat_data = geo_data["lat"]
-        if (circle_distance(long_data, lat_data, long, lat) < min_dist):
-            min_dist = circle_distance(long_data, lat_data, long, lat)
-            bar_name = item["Cells"]["Name"]
-
-    return {"Name": bar_name, "distance": round(min_dist/1000, 2)}
+    nearest_bar = min(bar_list,
+                      key=lambda x: circle_distance(long,
+                                                    lat, get_geo_data(x)["long"],
+                                                    get_geo_data(x)["lat"]))
+    min_dist = round(circle_distance(long, lat,
+                     get_geo_data(nearest_bar)["long"],
+                     get_geo_data(nearest_bar)["lat"])/1000, 2)
+    return {"Name": nearest_bar["Cells"]["Name"], "distance": min_dist}
 
 
 def main():
@@ -76,6 +70,8 @@ def main():
         print("Самый маленький бар: ", min_bar["Name"],
               "Число мест: ", min_bar["SeatsCount"])
 
+        #e = circle_distance(55.688475, 37.909184, 41.988559, 21.463479)
+        #print(e)
         long_data = input("Введите вашу широту\n")
         lat_data = input("Введите вашу долготу\n")
         nearest_bar = get_nearest_bar(bar_list, long_data, lat_data)
